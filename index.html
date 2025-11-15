@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Shehnaaz — Birthday Crime Scene</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0e;
+    --gold:#d4af37;
+    --blood:#8b0000;
+    --fog:#1a1a1d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:linear-gradient(180deg,#000 0%, #0b0b0e 60%);color:#e6e6e6;font-family:'Cormorant Garamond', serif;overflow-x:hidden;position:relative}
+
+  /* Crime scene tape */
+  .tape{position:fixed;top:80px;left:-10%;right:-10%;background:repeating-linear-gradient(45deg,#ffeb3b 0,#ffeb3b 60px,#000 60px,#000 120px);height:50px;transform:rotate(-3deg);z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.8);font-family:'Cinzel',serif;font-weight:700;font-size:1rem;color:#000;display:flex;align-items:center;justify-content:center;letter-spacing:8px;animation:tapeFloat 3s ease-in-out infinite}
+  @keyframes tapeFloat{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-2.5deg) translateY(-5px)}}
+
+  /* Chalk outline & blood splatter */
+  .spot{position:fixed;bottom:10%;right:15%;width:280px;height:320px;border:4px dashed rgba(255,255,255,0.6);border-radius:50% 50% 40% 60%;z-index:1;animation:fadeIn 2s ease-in;pointer-events:none}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  
+  .blood{position:fixed;bottom:8%;right:18%;width:120px;height:120px;background:radial-gradient(circle, var(--blood) 0%, transparent 70%);opacity:0.3;z-index:1;animation:bloodPulse 4s ease-in-out infinite;pointer-events:none}
+  @keyframes bloodPulse{0%,100%{transform:scale(1);opacity:0.3}50%{transform:scale(1.15);opacity:0.5}}
+
+  /* Police scanner effect */
+  .scan{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(0,100,255,0.8),transparent);animation:scan 4s linear infinite;z-index:99;pointer-events:none}
+  @keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+  /* Floating ash particles */
+  .ash{position:fixed;width:3px;height:3px;background:rgba(200,200,200,0.6);border-radius:50%;animation:ashFall linear infinite;pointer-events:none;z-index:2}
+  @keyframes ashFall{0%{transform:translateY(-10vh) translateX(0);opacity:0}10%{opacity:1}90%{opacity:0.8}100%{transform:translateY(110vh) translateX(20px);opacity:0}}
+
+  /* Gothic fog overlay */
+  .fog{position:fixed;left:0;right:0;top:0;bottom:0;pointer-events:none;background:radial-gradient(circle at 50% 80%, rgba(255,255,255,0.03), transparent 70%);mix-blend-mode:screen;z-index:5;animation:fogMove 20s ease-in-out infinite}
+  @keyframes fogMove{0%,100%{opacity:0.5}50%{opacity:0.8}}
+
+  .container{position:relative;z-index:10;padding:140px 20px 120px;text-align:center;max-width:1200px;margin:0 auto}
+
+  /* Elegant gold title with glitch */
+  h1{font-family:'Cinzel',serif;font-size:4.5rem;font-weight:700;margin:0 0 16px;color:var(--gold);letter-spacing:6px;text-shadow:0 0 20px rgba(212,175,55,0.5),0 0 40px rgba(212,175,55,0.3);position:relative;display:inline-block}
+  h1::before,h1::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;opacity:0}
+  h1.glitching::before{opacity:0.8;color:#ff0040;animation:glitch1 0.3s cubic-bezier(0.25,0.46,0.45,0.94) both;z-index:-1}
+  h1.glitching::after{opacity:0.8;color:#00ffff;animation:glitch2 0.3s cubic-bezier(0.25,0.46,0.45,0.94) both;z-index:-2}
+  @keyframes glitch1{0%,100%{transform:translate(0)}20%{transform:translate(-3px,3px)}40%{transform:translate(-3px,-3px)}60%{transform:translate(3px,3px)}80%{transform:translate(3px,-3px)}}
+  @keyframes glitch2{0%,100%{transform:translate(0)}20%{transform:translate(3px,3px)}40%{transform:translate(3px,-3px)}60%{transform:translate(-3px,3px)}80%{transform:translate(-3px,-3px)}}
+
+  .subtitle{margin-top:12px;font-size:1.4rem;color:#cfcfcf;opacity:0.95;font-weight:300;letter-spacing:1px}
+  .subtitle .blood-text{color:var(--blood);font-weight:700;text-shadow:0 0 10px rgba(139,0,0,0.6)}
+
+  /* Evidence card message */
+  .message{max-width:900px;margin:50px auto;background:rgba(20,20,22,0.6);padding:40px;border:2px solid rgba(212,175,55,0.4);box-shadow:0 15px 50px rgba(0,0,0,0.6),inset 0 0 20px rgba(212,175,55,0.05);backdrop-filter:blur(10px);line-height:1.9;border-radius:8px;position:relative;overflow:hidden;font-size:1.15rem}
+  .message::before{content:'EVIDENCE #001';position:absolute;top:12px;right:20px;font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold);opacity:0.5;letter-spacing:2px}
+  .message p{margin:0;text-align:left}
+
+  /* Photos grid - Polaroid style */
+  .photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:60px;padding:0 20px}
+  .photo{position:relative;overflow:hidden;border-radius:3px;background:#fff;padding:12px 12px 45px;box-shadow:0 10px 35px rgba(0,0,0,0.7);transform:rotate(0deg);transition:transform 0.4s ease,box-shadow 0.4s ease}
+  .photo:nth-child(odd){transform:rotate(-2deg)}
+  .photo:nth-child(even){transform:rotate(2deg)}
+  .photo:hover{transform:rotate(0deg) translateY(-10px) scale(1.03);box-shadow:0 20px 60px rgba(212,175,55,0.3)}
+  
+  .photo img{width:100%;height:380px;object-fit:cover;object-position:center top;display:block;filter:grayscale(20%) brightness(0.9) contrast(1.1);transition:filter 0.6s ease}
+  .photo:hover img{filter:grayscale(0) brightness(1) contrast(1.05)}
+
+  /* Photo number */
+  .photo::after{content:attr(data-num);position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:0.85rem;color:#333;letter-spacing:1px}
+
+  /* Floating embers */
+  .ember{position:fixed;width:5px;height:5px;border-radius:50%;background:radial-gradient(circle,var(--gold),transparent);animation:rise linear infinite;opacity:0;z-index:3;pointer-events:none}
+  @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:0.9}90%{opacity:0.7}100%{transform:translateY(-120vh) translateX(30px);opacity:0}}
+
+  footer{margin-top:80px;padding:50px 0 100px;color:#b3b3b3;font-size:1rem}
+  .cta{display:inline-block;padding:14px 32px;border:2px solid var(--gold);border-radius:8px;text-decoration:none;color:var(--gold);font-family:'Cinzel',serif;font-weight:600;letter-spacing:2px;margin-top:20px;transition:all 0.3s ease;background:rgba(212,175,55,0.05)}
+  .cta:hover{background:var(--gold);color:#000;box-shadow:0 8px 25px rgba(212,175,55,0.4);transform:translateY(-3px)}
+
+  /* Criminal Profile Section */
+  .criminal-profile{max-width:900px;margin:50px auto;background:rgba(20,20,22,0.7);padding:40px;border:3px solid rgba(212,175,55,0.5);box-shadow:0 15px 50px rgba(0,0,0,0.7);backdrop-filter:blur(10px);border-radius:8px}
+  .profile-header{text-align:center;margin-bottom:30px}
+  .profile-header .badge{display:inline-block;background:var(--blood);color:#fff;padding:8px 20px;font-family:'Cinzel',serif;font-weight:700;letter-spacing:3px;font-size:0.9rem;margin-bottom:15px;box-shadow:0 4px 15px rgba(139,0,0,0.6)}
+  .profile-header h2{font-family:'Cinzel',serif;color:var(--gold);font-size:2rem;letter-spacing:4px;margin:0}
+  .mugshots{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin:30px 0}
+  .mugshot{position:relative;background:#000;border:3px solid #333;padding:8px;box-shadow:0 8px 25px rgba(0,0,0,0.8)}
+  .mugshot img{width:100%;height:450px;object-fit:cover;object-position:center top;display:block;filter:grayscale(50%) contrast(1.2)}
+  .mugshot-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.9);color:#fff;padding:8px;text-align:center;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:2px;border-top:2px solid var(--gold)}
+  .charges{background:rgba(139,0,0,0.2);border:2px solid var(--blood);padding:20px;margin-top:20px;border-radius:4px}
+  .charges p{margin:0;font-size:1.05rem;line-height:1.7;color:#fff}
+  .charges strong{color:var(--gold);font-family:'Cinzel',serif;letter-spacing:1px}
+
+  @media (max-width:768px){
+    h1{font-size:3rem;letter-spacing:3px}
+    .tape{font-size:0.75rem;letter-spacing:4px;height:40px}
+    .container{padding:120px 15px 80px}
+    .message{padding:30px 20px;font-size:1.05rem}
+    .photos{grid-template-columns:1fr;gap:40px}
+    .photo{padding:10px 10px 40px}
+    .photo img{height:320px}
+    .spot{width:180px;height:220px;right:5%;bottom:5%}
+    .mugshots{grid-template-columns:1fr;gap:20px}
+    .mugshot img{height:400px}
+    .profile-header h2{font-size:1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="tape">⚠ CRIME SCENE — DO NOT CROSS — EVIDENCE COLLECTION IN PROGRESS ⚠</div>
+<div class="spot"></div>
+<div class="blood" aria-hidden="true"></div>
+<div class="scan"></div>
+<div class="fog"></div>
+
+<script>
+  // Create ash particles
+  for(let i=0;i<80;i++){
+    let a=document.createElement('div');
+    a.className='ash';
+    a.style.left=(Math.random()*100)+'vw';
+    a.style.top=(-Math.random()*20)+'vh';
+    a.style.animationDuration=(8+Math.random()*12)+'s';
+    a.style.animationDelay=(Math.random()*5)+'s';
+    a.style.width=a.style.height=(2+Math.random()*3)+'px';
+    document.body.appendChild(a);
+  }
+
+  // Create floating embers
+  for(let i=0;i<25;i++){
+    let e=document.createElement('div');
+    e.className='ember';
+    e.style.left=(Math.random()*100)+'vw';
+    e.style.bottom=(-Math.random()*10)+'vh';
+    e.style.animationDuration=(15+Math.random()*20)+'s';
+    e.style.animationDelay=(Math.random()*8)+'s';
+    document.body.appendChild(e);
+  }
+
+  // Glitch effect on title
+  setInterval(()=>{
+    const h1=document.querySelector('h1');
+    if(Math.random()>0.85){
+      h1.classList.add('glitching');
+      setTimeout(()=>h1.classList.remove('glitching'),300);
+    }
+  },2000);
+
+  // Copy link functionality
+  function copyLink(){
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      alert('🔗 Link copied! Share it with Shehnaaz!');
+    }).catch(()=>{
+      prompt('Copy this link:', window.location.href);
+    });
+  }
+</script>
+
+<main class="container">
+  <h1 class="glitch" data-text="SHEHNAAZ">SHEHNAAZ</h1>
+  <div class="subtitle">To the girl who survived me… <span class="blood-text">Happy Birthday</span></div>
+
+  <!-- Criminal Profile Section -->
+  <section class="criminal-profile">
+    <div class="profile-header">
+      <span class="badge">⚠ WANTED ⚠</span>
+      <h2>SUSPECT PROFILE</h2>
+    </div>
+    <div class="mugshots">
+      <div class="mugshot">
+        <img src="/mnt/data/WhatsApp Image 2025-11-15 at 17.18.49_0b9ed883.jpg" alt="Suspect Photo 1">
+        <div class="mugshot-label">PHOTO 1 • NOV 2025</div>
+      </div>
+      <div class="mugshot">
+        <img src="/mnt/data/68865818-dead-4fad-8fb4-dc4e52bc59f0.jpg" alt="Suspect Photo 2">
+        <div class="mugshot-label">PHOTO 2 • NOV 2025</div>
+      </div>
+    </div>
+    <div class="charges">
+      <p><strong>CHARGED WITH:</strong> Serial chaos creation • Conspiracy to be awesome • Aggravated friendship in the first degree</p>
+    </div>
+  </section>
+
+  <div class="message">
+    <p>
+      Grateful to her... I can be honest and say the craziest things to her and never feel judged. She's the same with me — matching my chaos, my rants, my random theories, everything. She's one of those rare people who turns every ordinary day into a twisted case file we both laugh about later. You survive my mess, I survive yours — together we solve each other's mysteries.
+    </p>
+  </div>
+
+  <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.8rem;margin:80px 0 30px;letter-spacing:3px">PHOTOGRAPHIC EVIDENCE</h3>
+
+  <section class="photos" aria-label="Birthday memories">
+    <figure class="photo" data-num="EVIDENCE 001"><img src="/mnt/data/WhatsApp Image 2025-11-15 at 17.18.53_5efc726e.jpg" alt="Memory 1"></figure>
+    <figure class="photo" data-num="EVIDENCE 002"><img src="/mnt/data/WhatsApp Image 2025-11-15 at 17.18.52_35bea465.jpg" alt="Memory 2"></figure>
+    <figure class="photo" data-num="EVIDENCE 003"><img src="/mnt/data/WhatsApp Image 2025-11-15 at 17.18.51_1923b77c.jpg" alt="Memory 3"></figure>
+    <figure class="photo" data-num="EVIDENCE 004"><img src="/mnt/data/WhatsApp Image 2025-11-15 at 17.18.51_7359eb72.jpg" alt="Memory 4"></figure>
+    <figure class="photo" data-num="EVIDENCE 005"><img src="/mnt/data/WhatsApp Image 2025-11-15 at 17.18.51_4b771705.jpg" alt="Memory 5"></figure>
+    <figure class="photo" data-num="EVIDENCE 006"><img src="/mnt/data/WhatsApp Image 2025-11-15 at 17.18.50_3733c3be.jpg" alt="Memory 6"></figure>
+    <figure class="photo" data-num="EVIDENCE 007"><img src="/mnt/data/WhatsApp Image 2025-11-15 at 17.18.48_c3c9e879.jpg" alt="Memory 7"></figure>
+  </section>
+
+  <footer>
+    <p style="margin-bottom:10px;font-style:italic">Case File: Closed with Love</p>
+    <p style="margin:20px auto 0;max-width:600px;font-size:0.95rem;color:#999;line-height:1.6">
+      <span style="color:var(--gold);font-family:'Cinzel',serif;letter-spacing:1px">⚠ INVESTIGATOR'S NOTE:</span><br>
+      Evidence collected may contain traces of cringe... but every memory here? Absolutely worth cataloging.
+    </p>
+    <a class="cta" href="#" onclick="event.preventDefault();copyLink()">📋 COPY LIVE LINK</a>
+  </footer>
+</main>
+
+</body>
+</html>
