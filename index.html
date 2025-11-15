@@ -90,6 +90,33 @@
   .charges p{margin:0;font-size:1.05rem;line-height:1.7;color:#fff}
   .charges strong{color:var(--gold);font-family:'Cinzel',serif;letter-spacing:1px}
 
+  /* Special last photo with dialogue */
+  .special-photo{position:relative;padding-top:80px !important}
+  .speech-bubble-top{position:absolute;top:-20px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:18px 28px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.8);animation:bounce 1.5s ease-in-out infinite;z-index:10;white-space:nowrap}
+  .speech-bubble-top p{margin:0;font-family:'Cinzel',serif;font-weight:700;font-size:1.3rem;letter-spacing:2px;color:var(--blood);text-shadow:0 2px 4px rgba(0,0,0,0.1)}
+  .bubble-arrow-down{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:12px solid #fff}
+  .photo-label{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:0.85rem;color:#333;letter-spacing:1px}
+
+  /* Final Message Section */
+  .final-message{max-width:700px;margin:80px auto 60px;text-align:center}
+  .old-photo{position:relative;display:inline-block;margin-bottom:30px}
+  .old-photo img{width:400px;height:500px;object-fit:cover;object-position:center top;border:3px solid var(--gold);border-radius:8px;box-shadow:0 15px 50px rgba(0,0,0,0.7);filter:grayscale(30%) brightness(0.95)}
+  .speech-bubble{position:absolute;top:-60px;right:-120px;background:#fff;color:#000;padding:20px 30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.8);animation:bounce 1s ease-in-out infinite}
+  .speech-bubble p{margin:0;font-family:'Cinzel',serif;font-weight:700;font-size:1.5rem;letter-spacing:2px;color:var(--blood)}
+  .bubble-arrow{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:15px solid #fff}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .closing-line{font-size:1.2rem;color:#cfcfcf;font-style:italic;margin-top:20px;line-height:1.8}
+
+  /* Final Message Section */
+  .final-message{max-width:700px;margin:80px auto 60px;text-align:center}
+  .old-photo{position:relative;display:inline-block;margin-bottom:30px}
+  .old-photo img{width:400px;height:500px;object-fit:cover;object-position:center top;border:3px solid var(--gold);border-radius:8px;box-shadow:0 15px 50px rgba(0,0,0,0.7);filter:grayscale(30%) brightness(0.95)}
+  .speech-bubble{position:absolute;top:-60px;right:-120px;background:#fff;color:#000;padding:20px 30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.8);animation:bounce 1s ease-in-out infinite}
+  .speech-bubble p{margin:0;font-family:'Cinzel',serif;font-weight:700;font-size:1.5rem;letter-spacing:2px;color:var(--blood)}
+  .bubble-arrow{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:15px solid #fff}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .closing-line{font-size:1.2rem;color:#cfcfcf;font-style:italic;margin-top:20px;line-height:1.8}
+
   @media (max-width:768px){
     h1{font-size:3rem;letter-spacing:3px}
     .tape{font-size:0.75rem;letter-spacing:4px;height:40px}
@@ -102,6 +129,11 @@
     .mugshots{grid-template-columns:1fr;gap:20px}
     .mugshot img{height:400px}
     .profile-header h2{font-size:1.5rem}
+    .old-photo img{width:100%;max-width:350px;height:440px}
+    .speech-bubble{top:-50px;right:-20px;padding:15px 20px}
+    .speech-bubble p{font-size:1.2rem}
+    .speech-bubble-top{padding:12px 20px;top:-15px}
+    .speech-bubble-top p{font-size:1rem}
   }
 </style>
 </head>
@@ -168,11 +200,11 @@
     </div>
     <div class="mugshots">
       <div class="mugshot">
-        <img src="WhatsApp Image 2025-11-15 at 17.18.49_0b9ed883.jpg" alt="Suspect Photo 1">
+        <img src="p1.jpg" alt="Suspect Photo 1">
         <div class="mugshot-label">PHOTO 1 • NOV 2025</div>
       </div>
       <div class="mugshot">
-        <img src="68865818-dead-4fad-8fb4-dc4e52bc59f0.jpg" alt="Suspect Photo 2">
+        <img src="p2.jpg" alt="Suspect Photo 2">
         <div class="mugshot-label">PHOTO 2 • NOV 2025</div>
       </div>
     </div>
@@ -190,13 +222,22 @@
   <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.8rem;margin:80px 0 30px;letter-spacing:3px">PHOTOGRAPHIC EVIDENCE</h3>
 
   <section class="photos" aria-label="Birthday memories">
-    <figure class="photo" data-num="EVIDENCE 001"><img src="WhatsApp Image 2025-11-15 at 17.18.53_5efc726e.jpg" alt="Memory 1"></figure>
-    <figure class="photo" data-num="EVIDENCE 002"><img src="WhatsApp Image 2025-11-15 at 17.18.52_35bea465.jpg" alt="Memory 2"></figure>
-    <figure class="photo" data-num="EVIDENCE 003"><img src="WhatsApp Image 2025-11-15 at 17.18.51_1923b77c.jpg" alt="Memory 3"></figure>
-    <figure class="photo" data-num="EVIDENCE 004"><img src="WhatsApp Image 2025-11-15 at 17.18.51_7359eb72.jpg" alt="Memory 4"></figure>
-    <figure class="photo" data-num="EVIDENCE 005"><img src="WhatsApp Image 2025-11-15 at 17.18.51_4b771705.jpg" alt="Memory 5"></figure>
-    <figure class="photo" data-num="EVIDENCE 006"><img src="WhatsApp Image 2025-11-15 at 17.18.50_3733c3be.jpg" alt="Memory 6"></figure>
-    <figure class="photo" data-num="EVIDENCE 007"><img src="WhatsApp Image 2025-11-15 at 17.18.48_c3c9e879.jpg" alt="Memory 7"></figure>
+    <figure class="photo" data-num="EVIDENCE 001"><img src="p3.jpg" alt="Memory 1"></figure>
+    <figure class="photo" data-num="EVIDENCE 002"><img src="p4.jpg" alt="Memory 2"></figure>
+    <figure class="photo" data-num="EVIDENCE 003"><img src="p5.jpg" alt="Memory 3"></figure>
+    <figure class="photo" data-num="EVIDENCE 004"><img src="p6.jpg" alt="Memory 4"></figure>
+    <figure class="photo" data-num="EVIDENCE 005"><img src="p7.jpg" alt="Memory 5"></figure>
+    <figure class="photo" data-num="EVIDENCE 006"><img src="p8.jpg" alt="Memory 6"></figure>
+    
+    <!-- Special last photo with dialogue -->
+    <figure class="photo special-photo">
+      <div class="speech-bubble-top">
+        <p>YOU ARE OLD!!!</p>
+        <div class="bubble-arrow-down"></div>
+      </div>
+      <img src="p9.jpg" alt="Birthday girl">
+      <div class="photo-label">FINAL EVIDENCE</div>
+    </figure>
   </section>
 
   <footer>
