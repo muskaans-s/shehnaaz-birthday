@@ -84,17 +84,18 @@
   .profile-header h2{font-family:'Cinzel',serif;color:var(--gold);font-size:2rem;letter-spacing:4px;margin:0}
   .mugshots{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin:30px 0}
   .mugshot{position:relative;background:#000;border:3px solid #333;padding:8px;box-shadow:0 8px 25px rgba(0,0,0,0.8)}
-  .mugshot img{width:100%;height:450px;object-fit:cover;object-position:center top;display:block;filter:grayscale(50%) contrast(1.2)}
+  .mugshot img{width:100%;height:450px;object-fit:contain;object-position:center;display:block;filter:grayscale(50%) contrast(1.2);background:#000}
   .mugshot-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.9);color:#fff;padding:8px;text-align:center;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:2px;border-top:2px solid var(--gold)}
   .charges{background:rgba(139,0,0,0.2);border:2px solid var(--blood);padding:20px;margin-top:20px;border-radius:4px}
   .charges p{margin:0;font-size:1.05rem;line-height:1.7;color:#fff}
   .charges strong{color:var(--gold);font-family:'Cinzel',serif;letter-spacing:1px}
 
-  /* Special last photo with dialogue */
-  .special-photo{position:relative;padding-top:80px !important}
-  .speech-bubble-top{position:absolute;top:-20px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:18px 28px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.8);animation:bounce 1.5s ease-in-out infinite;z-index:10;white-space:nowrap}
-  .speech-bubble-top p{margin:0;font-family:'Cinzel',serif;font-weight:700;font-size:1.3rem;letter-spacing:2px;color:var(--blood);text-shadow:0 2px 4px rgba(0,0,0,0.1)}
-  .bubble-arrow-down{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:12px solid #fff}
+  /* Special last photo with dialogue - CENTERED */
+  .final-photo-section{text-align:center;margin:60px auto 40px;max-width:400px}
+  .special-photo{position:relative;padding-top:100px !important;display:inline-block;margin:0 auto}
+  .speech-bubble-top{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:20px 32px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.9);animation:bounce 1.5s ease-in-out infinite;z-index:10;white-space:nowrap}
+  .speech-bubble-top p{margin:0;font-family:'Cinzel',serif;font-weight:700;font-size:1.4rem;letter-spacing:2px;color:var(--blood);text-shadow:0 2px 4px rgba(0,0,0,0.1)}
+  .bubble-arrow-down{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:15px solid #fff}
   .photo-label{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:0.85rem;color:#333;letter-spacing:1px}
 
   /* Final Message Section */
@@ -132,8 +133,10 @@
     .old-photo img{width:100%;max-width:350px;height:440px}
     .speech-bubble{top:-50px;right:-20px;padding:15px 20px}
     .speech-bubble p{font-size:1.2rem}
-    .speech-bubble-top{padding:12px 20px;top:-15px}
-    .speech-bubble-top p{font-size:1rem}
+    .speech-bubble-top{padding:14px 22px;top:5px}
+    .speech-bubble-top p{font-size:1.1rem}
+    .special-photo{padding-top:85px !important}
+    .final-photo-section{max-width:350px;margin:50px auto 30px}
   }
 </style>
 </head>
@@ -228,8 +231,10 @@
     <figure class="photo" data-num="EVIDENCE 004"><img src="p6.jpg" alt="Memory 4"></figure>
     <figure class="photo" data-num="EVIDENCE 005"><img src="p7.jpg" alt="Memory 5"></figure>
     <figure class="photo" data-num="EVIDENCE 006"><img src="p8.jpg" alt="Memory 6"></figure>
-    
-    <!-- Special last photo with dialogue -->
+  </section>
+
+  <!-- Special centered last photo with dialogue -->
+  <section class="final-photo-section">
     <figure class="photo special-photo">
       <div class="speech-bubble-top">
         <p>YOU ARE OLD!!!</p>
